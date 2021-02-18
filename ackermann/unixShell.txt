@@ -1,0 +1,21 @@
+ack() {
+  local m=$1
+  local n=$2
+  if [ $m -eq 0 ]; then
+    echo -n $((n+1))
+  elif [ $n -eq 0 ]; then
+    ack $((m-1)) 1
+  else
+    ack $((m-1)) $(ack $m $((n-1)))
+  fi
+}
+
+Example:
+for ((m=0;m<=3;m++)); do
+  for ((n=0;n<=6;n++)); do
+    ack $m $n
+    echo -n " "
+  done
+  echo
+done
+
